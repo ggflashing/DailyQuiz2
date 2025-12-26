@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">DailyQuiz2</string>
+
+
+
+
+    <string name="Heading_0">Бывает и так!</string>
+    <string name="Heading_1">Сложный вопрос?</string>
+    <string name="Heading_2">Есть над чем поработать</string>
+    <string name="Heading_3">Хороший результат!</string>
+    <string name="Heading_4">Почти идеально!</string>
+    <string name="Heading_5">Идеально!</string>
+
+    <string name="Subtitle_5">5/5 — вы ответили на\nвсё правильно. Это\nблестящий результат!</string>
+    <string name="Subtitle_4">4/5 — очень близко\n к совершенству. Ещё один шаг!</string>
+    <string name="Subtitle_3">3/5 — вы на верном\nпути. Продолжайте\nтренироваться!</string>
+    <string name="Subtitle_2">2/5 — не\nрасстраивайтесь,\nпопробуйте ещё раз!</string>
+    <string name="Subtitle_1">1/5 — иногда просто не\nваш день. Следующая\nпопытка будет лучше!</string>
+    <string name="Subtitle_0">0/5 — не отчаивайтесь.\nНачните заново и\nудивите себя!</string>
+
+
+</resources>
