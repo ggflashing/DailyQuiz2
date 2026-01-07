@@ -6,6 +6,15 @@ import com.example.dailyquiz2.connect_api_Retrofit.connect_quiz_model
 import javax.inject.Inject
 
 
+
+sealed class QuizApiResult {
+
+    data class Success(val data: Quiz_respons) : QuizApiResult()
+
+    data class Error(val message: String, val code: Int) : QuizApiResult()
+
+}
+
 class QuizRetrofit @Inject constructor(
     private val api: ServisApi
 
@@ -18,7 +27,7 @@ class QuizRetrofit @Inject constructor(
 
     }
 
-    suspend fun getfailed_code(): List<Int> {
+    suspend fun getfailed_code(): List<Int> {   //Не разобрался как ловить ловить responseCode заменил по другому
 
        return listOf(api.getQuestions().responseCode)
     }

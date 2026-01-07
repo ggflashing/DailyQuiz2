@@ -15,6 +15,7 @@ import com.example.dailyquiz2.presentation.Quiz_analysis_screen.QuestionResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -28,9 +29,10 @@ import javax.inject.Inject
 sealed class QuizScreenState {
 
     object Start : QuizScreenState()
+
+    object Loading : QuizScreenState()
     data class Progress(val currentIndex: Int) : QuizScreenState()
-    data class Result(val correctCount: Int)
-        : QuizScreenState()
+    data class Result(val correctCount: Int) : QuizScreenState()
 
 
 }
@@ -73,6 +75,7 @@ class Start_quiz_ViewModel @Inject constructor(
         viewModelScope.launch {
             historyRepository.saveHistory(history)
         }
+
     }
 
 
@@ -152,6 +155,7 @@ class Start_quiz_ViewModel @Inject constructor(
                     selectedAnswerIndex = null
                 )
             } else {
+
                 val results = state.quiz.indices.map { idx ->
                     QuestionResult(
                         questionIndex = idx,
@@ -223,11 +227,23 @@ class Start_quiz_ViewModel @Inject constructor(
   //  }
 
     fun onStartClicked() {
+
         Log.d("QuizDebug", "onStartClicked called")
+
+        _uiState.update {
+
+            it.copy(screenState = QuizScreenState.Loading)
+
+        }
+
+
         viewModelScope.launch {
-            Logics_use().collect { quiz ->
+            Logics_use().first().let{ quiz ->
+
                 _uiState.update {
+
                     Log.d("QuizDebug", "Quiz loaded: ${quiz.size} questions")
+
                     it.copy(
                         quiz = quiz,
                         answersHistory = List(quiz.size) { null },

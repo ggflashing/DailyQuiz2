@@ -38,6 +38,10 @@ fun start_quiz(
             )
         }
 
+        QuizScreenState.Loading -> {
+            Progress_screen()
+        }
+
         is QuizScreenState.Progress -> {
             QuizInProgressScreen(
                 state = state,

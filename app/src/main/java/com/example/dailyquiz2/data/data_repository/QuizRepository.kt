@@ -13,6 +13,7 @@ import com.example.dailyquiz2.mapper_data.toDomain
 import com.example.dailyquiz2.presentation.History_Quiz.history_models
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -28,17 +29,14 @@ class QuizRepository @Inject constructor(
 
 
     override fun get_quistion_domain(): Flow<List<Quiz>> = flow {
-        try {
+
             val response = QuizRetrofit.getQustion_code()
             emit(response.results.map {
                 it.toDomain()
             })
 
-        } catch (e: Exception) {
-            emit(emptyList())
-            println(e.message)
-
-        }
+    }.catch { e->  // Здесь заменил ловлю responseCode чтобы приложение не крашилось если была ошибка
+        emit(emptyList())
     }
 
    // override suspend fun saveHistory(item: history_models) {

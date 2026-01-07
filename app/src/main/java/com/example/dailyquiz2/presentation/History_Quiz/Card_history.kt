@@ -1,5 +1,6 @@
 package com.example.dailyquiz2.presentation.History_Quiz
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +40,7 @@ import com.example.dailyquiz2.R
 
 
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun Card_history(
 

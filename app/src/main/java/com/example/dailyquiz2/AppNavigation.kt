@@ -11,6 +11,7 @@ import com.example.dailyquiz2.AppRouts.Quiz_resuilt_end_Screen
 
 import com.example.dailyquiz2.presentation.History_Quiz.history_Quiz
 import com.example.dailyquiz2.presentation.Quiz_analysis_screen.Quiz_analysis_screen
+import com.example.dailyquiz2.presentation.Start_Quiz.Progress_screen
 import com.example.dailyquiz2.presentation.Start_Quiz.QuizInProgressScreen
 import com.example.dailyquiz2.presentation.Start_Quiz.Quiz_result_end_Screen
 import com.example.dailyquiz2.presentation.Start_Quiz.start_quiz
@@ -21,6 +22,8 @@ object AppRouts {
     const val START_QUIZ = "start_quiz"
 
     const val QuizInProgress = "QuizInProgressScreen"
+
+    const val Progress_screen = "Progress_screen"
 
     const val Quiz_resuilt_end_Screen = "Quiz_resuilt_end_Screen"
 
@@ -47,6 +50,25 @@ fun AppNavigation() {
     ){
 
 
+        composable(AppRouts.Progress_screen){
+            Progress_screen(
+            //    navController = navController,
+             //   onNavigateBack = {
+           //         navController.popBackStack()
+           //     },
+
+           //     navigation_To_analysis_screen = {
+            //        navController.navigate(AppRouts.QUIZ_ANALYSIS)
+
+            //    },
+            //    failed = {
+           //         navController.popBackStack()
+           //     }
+            )
+
+        }
+
+
         composable(AppRouts.START_QUIZ) {
             start_quiz(
                 navController = navController,
@@ -61,12 +83,6 @@ fun AppNavigation() {
                 onNavigateToHistory = {
                     navController.navigate(AppRouts.HISTORY_QUIZ)
                 }
-
-
-
-
-
-
 
 
 
