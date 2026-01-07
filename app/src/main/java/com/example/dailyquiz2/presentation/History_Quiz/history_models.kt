@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-class history_models(
+data class history_models(
 
     val stars: Int,
     val total: Int,
