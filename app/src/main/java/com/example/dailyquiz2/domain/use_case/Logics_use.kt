@@ -1,6 +1,5 @@
 package com.example.dailyquiz2.domain.use_case
 
-import com.example.dailyquiz2.Repository_module
 import com.example.dailyquiz2.data.data_repository.QuizRepository
 import com.example.dailyquiz2.domain.models_domain.Quiz
 import com.example.dailyquiz2.domain.repository.QuizRepository_Domain
