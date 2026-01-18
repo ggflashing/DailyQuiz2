@@ -5,10 +5,10 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
 import com.example.dailyquiz2.domain.use_case.Logics_use
 import com.example.dailyquiz2.presentation.History_Quiz.history_models
+import com.example.dailyquiz2.presentation.History_Quiz.result_history_models
 import com.example.dailyquiz2.presentation.QuizResultRepository
 import com.example.dailyquiz2.presentation.Quiz_analysis_screen.QuestionResult
 
@@ -18,12 +18,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
+import java.util.UUID
 import javax.inject.Inject
 
 sealed class QuizScreenState {
@@ -34,9 +34,7 @@ sealed class QuizScreenState {
     data class Progress(val currentIndex: Int) : QuizScreenState()
     data class Result(val correctCount: Int) : QuizScreenState()
 
-
 }
-
 
 @HiltViewModel
 class Start_quiz_ViewModel @Inject constructor(
@@ -52,11 +50,8 @@ class Start_quiz_ViewModel @Inject constructor(
 ): ViewModel() {
     private val _uiState = MutableStateFlow(QuizUiState_QuizProgress())
     val uiState = _uiState.asStateFlow()
-
+    val historyID = UUID.randomUUID().toString()
   //  val uiState: StateFlow<QuizUiState_QuizProgress> = _uiState
-
-
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -64,12 +59,17 @@ class Start_quiz_ViewModel @Inject constructor(
         val now = ZonedDateTime.now(ZoneId.of("Europe/Moscow"))
         val month = now.month.getDisplayName(TextStyle.FULL, Locale("ru", "RU"))
 
+
+
+
         val history = history_models(
             stars = correct,
             total = total,
             month = month,
             monthNumber = now.dayOfMonth,
-            time = now.format(DateTimeFormatter.ofPattern("HH:mm"))
+            time = now.format(DateTimeFormatter.ofPattern("HH:mm")),
+            id_history_model = historyID,
+
         )
 
         viewModelScope.launch {
@@ -77,11 +77,6 @@ class Start_quiz_ViewModel @Inject constructor(
         }
 
     }
-
-
-
-
-
 
     fun navigation_Quiz_analysis_screen() {
        _uiState.update { state ->
@@ -118,9 +113,6 @@ class Start_quiz_ViewModel @Inject constructor(
 
 
     }
-
-
-
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun onNextQuestion() {
@@ -167,14 +159,42 @@ class Start_quiz_ViewModel @Inject constructor(
                     )
                 }
 
-
-
                 resultRepository.setResults(results)
 
+
+                    //  fun result_datastore_history(newHistory: List<Int?>) {
+                 //   Log.d("QuizDebug", "result_datastore_history called")
+
+
+
+                Log.d("QuizDebug", "Generated historyId for all results: $historyID")
+
+                state.quiz.indices.forEach { idx ->
+                    val model = result_history_models(
+                        questionIndex = idx,
+                        totalQuestions = state.quiz.size,
+                        questionText = state.quiz[idx].question,
+                        options = state.quiz[idx].answers,
+                        selectedIndex = newHistory[idx] ?: -1,
+                        correctIndex = state.quiz[idx].correctAnswerIndex,
+                        id = UUID.randomUUID().toString(),
+                        historyId = historyID
+                    )
+
+                    Log.d(
+                        "QuizDebug",
+                        "Result idx=$idx: id=${model.id}, historyId=${model.historyId}"
+                    )
+
+                    viewModelScope.launch {
+                        historyRepository.save_result_history(model)
+                    }
+                }
+
+
+
+
                 var correctCount = 0
-
-
-
 
                 state.quiz.indices.forEach { idx ->
                     val userAnswer = newHistory.getOrNull(idx)
@@ -209,17 +229,9 @@ class Start_quiz_ViewModel @Inject constructor(
                         )
                     )
 
-
-
-
                 }
             }
         }
-
-
-
-
-
 
 
     //init {
@@ -261,9 +273,6 @@ class Start_quiz_ViewModel @Inject constructor(
         }
 
     }
-
-
-
 
   //  fun loadQuiz() {
   //      viewModelScope.launch {

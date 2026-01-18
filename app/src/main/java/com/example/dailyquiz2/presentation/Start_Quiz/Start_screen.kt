@@ -44,16 +44,10 @@ import com.example.dailyquiz2.R
 @Composable
 fun Start_screen (
 
-
-
-
     navController: () -> Unit,
     StartedClick : () -> Unit,
 
-
-
 ){
-
 
     Scaffold(containerColor = Color.White) { paddingValues ->
 

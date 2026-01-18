@@ -4,7 +4,6 @@ package com.example.dailyquiz2.presentation.Start_Quiz
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -18,8 +17,11 @@ fun start_quiz(
 
     viewModel: Start_quiz_ViewModel = hiltViewModel(),
     navController: NavHostController,
+
     onNavigateBack: () -> Unit,
+
     onNavigateToQUIZ_ANALYSIS: () -> Unit,
+
     onNavigateToHistory: () -> Unit
 
 ){
@@ -66,6 +68,7 @@ fun start_quiz(
                     onNavigateToQUIZ_ANALYSIS()
 
                 },
+                onNavigateBack = onNavigateBack,
             )
         }
 

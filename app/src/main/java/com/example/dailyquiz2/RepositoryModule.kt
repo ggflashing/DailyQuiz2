@@ -20,13 +20,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
-
     @Provides
     @Singleton
     fun provideDataStore(
         @ApplicationContext context: Context
     ): DataStore<Preferences> =
         context.dataStore
+
 
     @Provides
     @Singleton

@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             val systemUiController = rememberSystemUiController()
             val darkIcons = false
@@ -45,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     darkIcons = darkIcons
                 )
             }
+
 
             DailyQuiz2Theme {
                 Surface (
