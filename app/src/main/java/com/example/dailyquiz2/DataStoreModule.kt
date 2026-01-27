@@ -9,7 +9,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.preferencesDataStore
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
 import com.example.dailyquiz2.data.data_repository.History_repositore
 import com.example.dailyquiz2.data.datasource.dataStore
@@ -18,7 +17,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
+object DataStoreModule {
 
     @Provides
     @Singleton
