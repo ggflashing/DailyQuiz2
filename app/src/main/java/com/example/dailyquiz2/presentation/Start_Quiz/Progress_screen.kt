@@ -57,18 +57,12 @@ verticalArrangement = Arrangement.Center,
 
         ) {
 
-
-
-
-
                 Image(
                     painter = painterResource(id = R.drawable.logo_start_screen),
                     modifier = Modifier
                         .sizeIn(280.dp,63.dp),
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
-
-
 
 
                 )
@@ -79,15 +73,8 @@ verticalArrangement = Arrangement.Center,
             }
 
 
-
-
-
-
         }
 
 
-
     }
-
-
 

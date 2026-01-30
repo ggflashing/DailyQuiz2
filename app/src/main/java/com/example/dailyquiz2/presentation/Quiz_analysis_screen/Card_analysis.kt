@@ -31,7 +31,9 @@ import com.example.dailyquiz2.R
 
 @Composable
 fun Card_analysis(
+
     questionResult: QuestionResult,
+
 ) {
 
 

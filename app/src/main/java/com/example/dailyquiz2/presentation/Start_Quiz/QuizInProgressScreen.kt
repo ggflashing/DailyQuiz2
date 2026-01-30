@@ -64,10 +64,7 @@ fun QuizInProgressScreen(
 
 
 
-
-
     Scaffold(topBar = {
-
 
 
         Box(

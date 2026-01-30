@@ -6,14 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.dailyquiz2.AppRouts.Quiz_resuilt_end_Screen
 
 
 import com.example.dailyquiz2.presentation.History_Quiz.history_Quiz
+import com.example.dailyquiz2.presentation.History_Quiz.navigation_history_screen
+import com.example.dailyquiz2.presentation.History_Quiz.result_history
 import com.example.dailyquiz2.presentation.Quiz_analysis_screen.Quiz_analysis_screen
 import com.example.dailyquiz2.presentation.Start_Quiz.Progress_screen
-import com.example.dailyquiz2.presentation.Start_Quiz.QuizInProgressScreen
-import com.example.dailyquiz2.presentation.Start_Quiz.Quiz_result_end_Screen
 import com.example.dailyquiz2.presentation.Start_Quiz.start_quiz
 
 
@@ -30,6 +29,10 @@ object AppRouts {
     const val QUIZ_ANALYSIS = "quiz_analysis"
 
     const val HISTORY_QUIZ = "history_quiz"
+
+    const val History_result = "History_result"
+
+    const val navigation_history_screen = "navigation_history_screen"
 
 
 }
@@ -68,7 +71,6 @@ fun AppNavigation() {
 
         }
 
-
         composable(AppRouts.START_QUIZ) {
             start_quiz(
                 navController = navController,
@@ -81,20 +83,14 @@ fun AppNavigation() {
                 },
 
                 onNavigateToHistory = {
-                    navController.navigate(AppRouts.HISTORY_QUIZ)
+                    navController.navigate(AppRouts.navigation_history_screen)
                 }
-
 
 
             )
 
 
         }
-
-
-
-
-
 
         composable(AppRouts.QUIZ_ANALYSIS) {
             Quiz_analysis_screen(
@@ -106,34 +102,32 @@ fun AppNavigation() {
                 onNavigateToQUIZ_start = {
                     navController.navigate(AppRouts.START_QUIZ)
                 }
+
+            )
+
+        }
+
+
+        composable(AppRouts.navigation_history_screen) {
+            navigation_history_screen(
+                navController = navController,
+                onNavigateBack = {
+                    navController.popBackStack()
+
+                },
+                navigation_history_Quiz = {
+                    navController.navigate(AppRouts.HISTORY_QUIZ)
+                },
+                navigation_history_Quiz_result = {
+                    navController.navigate(AppRouts.History_result)
+                },
             )
 
 
-
         }
-
-        composable(AppRouts.HISTORY_QUIZ) {
-        history_Quiz(
-            navController = navController,
-            onNavigateBack = {
-                navController.popBackStack()
-
-            },
-
-
-
-        )
-
-
-        }
-
-
-
 
 
     }
-
-
 
 }
 
