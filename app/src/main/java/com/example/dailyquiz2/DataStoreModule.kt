@@ -26,7 +26,6 @@ object DataStoreModule {
     ): DataStore<Preferences> =
         context.dataStore
 
-
     @Provides
     @Singleton
     fun provideHistoryRepository(

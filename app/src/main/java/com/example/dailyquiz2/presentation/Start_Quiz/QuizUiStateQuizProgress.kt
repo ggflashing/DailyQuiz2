@@ -3,7 +3,7 @@ package com.example.dailyquiz2.presentation.Start_Quiz
 import com.example.dailyquiz2.domain.models_domain.Quiz
 
 
-data class QuizUiState_QuizProgress(
+data class QuizUiStateQuizProgress(
     val quiz: List<Quiz> = emptyList(),
     val currentIndex: Int = 0,
     val selectedAnswerIndex: Int? = null,

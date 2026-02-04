@@ -33,9 +33,9 @@ import com.example.dailyquiz2.R
 
 @SuppressLint("SuspiciousIndentation")
 @Composable
-fun Card_history(
+fun CardHistory(
 
-    historyModels: history_models,
+    historyModels: historyModels,
     quizIndex: Int,
   //  isSelected: Boolean,
     onSelect: () -> Unit,

@@ -25,18 +25,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailyquiz2.R
-import com.example.dailyquiz2.presentation.Quiz_analysis_screen.QuestionResult
 
 @Composable
-fun Card_history_result(
+fun CardHistoryResult(
 
-    result_history_models: result_history_models,
-
-
-) {
+    resultHistoryModels: resultHistoryModels,
 
 
-    val isCorrect = result_history_models.selectedIndex == result_history_models.correctIndex
+    ) {
+
+
+    val isCorrect = resultHistoryModels.selectedIndex == resultHistoryModels.correctIndex
 
     Card(
         modifier = Modifier
@@ -56,7 +55,7 @@ fun Card_history_result(
             ) {
 
                 Text(
-                    text = "Вопрос ${result_history_models.questionIndex + 1} из ${result_history_models.totalQuestions}",
+                    text = "Вопрос ${resultHistoryModels.questionIndex + 1} из ${resultHistoryModels.totalQuestions}",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFFBCB7FF),
@@ -82,7 +81,7 @@ fun Card_history_result(
             Spacer(modifier = Modifier.height(12.dp))
 
             Text(
-                text = result_history_models.questionText,
+                text = resultHistoryModels.questionText,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
@@ -93,9 +92,9 @@ fun Card_history_result(
             Spacer(modifier = Modifier.height(16.dp))
 
 
-            result_history_models.options.forEachIndexed { index, optionText ->
-                val Selected = index == result_history_models.selectedIndex
-                val CorrectSelected = Selected && index == result_history_models.correctIndex
+            resultHistoryModels.options.forEachIndexed { index, optionText ->
+                val Selected = index == resultHistoryModels.selectedIndex
+                val CorrectSelected = Selected && index == resultHistoryModels.correctIndex
 
                 val borderColor = when {
                     CorrectSelected -> Color(0xFF00AE3A)

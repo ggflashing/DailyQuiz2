@@ -29,7 +29,7 @@ import com.example.dailyquiz2.R
 
 
 @Composable
-fun Quiz_result_end_Screen(
+fun QuizResultEndScreen(
 
 
     correctAnswers: Int,

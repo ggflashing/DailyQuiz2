@@ -30,7 +30,6 @@ object NetworkModule {
 
     }
 
-
     @Provides
     @Singleton
     fun provideOkHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {

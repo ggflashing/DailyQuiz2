@@ -1,11 +1,10 @@
 package com.example.dailyquiz2.presentation.History_Quiz
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.util.UUID
 
 @Serializable
-data class result_history_models(
+data class resultHistoryModels(
 
     val id: String = UUID.randomUUID().toString(),
 

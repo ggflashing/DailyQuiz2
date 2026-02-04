@@ -35,10 +35,10 @@ import com.example.dailyquiz2.R
 
 
 @Composable
-fun result_history (
+fun resultHistory (
     navController: NavController,
 
-    results: List<result_history_models>,
+    results: List<resultHistoryModels>,
 
     onNavigateBack: () -> Unit,
 
@@ -203,7 +203,7 @@ fun result_history (
 
             items(results) { result ->
 
-                Card_history_result(result_history_models = result)
+                CardHistoryResult(resultHistoryModels = result)
             }
 
             item {
