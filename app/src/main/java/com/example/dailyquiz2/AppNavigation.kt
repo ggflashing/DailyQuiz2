@@ -8,31 +8,34 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 
-import com.example.dailyquiz2.presentation.History_Quiz.history_Quiz
-import com.example.dailyquiz2.presentation.History_Quiz.navigation_history_screen
-import com.example.dailyquiz2.presentation.History_Quiz.result_history
+
+import com.example.dailyquiz2.presentation.History_Quiz.navigationHistoryScreen
+
+
 import com.example.dailyquiz2.presentation.Quiz_analysis_screen.Quiz_analysis_screen
-import com.example.dailyquiz2.presentation.Start_Quiz.Progress_screen
-import com.example.dailyquiz2.presentation.Start_Quiz.start_quiz
+import com.example.dailyquiz2.presentation.Start_Quiz.ProgressScreen
+
+import com.example.dailyquiz2.presentation.Start_Quiz.startQuiz
+
 
 
 object AppRouts {
 
-    const val START_QUIZ = "start_quiz"
+    const val STARTQUIZ = "startQuiz"
 
     const val QuizInProgress = "QuizInProgressScreen"
 
-    const val Progress_screen = "Progress_screen"
+    const val ProgressScreen = "ProgressScreen"
 
-    const val Quiz_resuilt_end_Screen = "Quiz_resuilt_end_Screen"
+    const val QuizResuiltEndScreen = "QuizResuiltEndScreen"
 
-    const val QUIZ_ANALYSIS = "quiz_analysis"
+    const val QUIZANALYSIS = "quizAnalysis"
 
-    const val HISTORY_QUIZ = "history_quiz"
+    const val HISTORYQUIZ = "historyQuiz"
 
-    const val History_result = "History_result"
+    const val HistoryResult = "HistoryResult"
 
-    const val navigation_history_screen = "navigation_history_screen"
+    const val navigationHistoryScreen = "navigationHistoryScreen"
 
 
 }
@@ -42,8 +45,7 @@ object AppRouts {
 fun AppNavigation() {
     var navController = rememberNavController()
 
-    val startDestination = AppRouts.START_QUIZ
-
+    val startDestination = AppRouts.STARTQUIZ
 
     NavHost(
 
@@ -51,10 +53,8 @@ fun AppNavigation() {
         startDestination = startDestination
 
     ){
-
-
-        composable(AppRouts.Progress_screen){
-            Progress_screen(
+        composable(AppRouts.ProgressScreen){
+            ProgressScreen(
             //    navController = navController,
              //   onNavigateBack = {
            //         navController.popBackStack()
@@ -71,28 +71,24 @@ fun AppNavigation() {
 
         }
 
-        composable(AppRouts.START_QUIZ) {
-            start_quiz(
+        composable(AppRouts.STARTQUIZ) {
+            startQuiz(
                 navController = navController,
                 onNavigateBack = {
                     navController.popBackStack()
 
                 },
                 onNavigateToQUIZ_ANALYSIS = {
-                    navController.navigate(AppRouts.QUIZ_ANALYSIS)
+                    navController.navigate(AppRouts.QUIZANALYSIS)
                 },
 
                 onNavigateToHistory = {
-                    navController.navigate(AppRouts.navigation_history_screen)
+                    navController.navigate(AppRouts.navigationHistoryScreen)
                 }
-
-
             )
-
-
         }
 
-        composable(AppRouts.QUIZ_ANALYSIS) {
+        composable(AppRouts.QUIZANALYSIS) {
             Quiz_analysis_screen(
                 navController = navController,
                 onNavigateBack = {
@@ -100,34 +96,28 @@ fun AppNavigation() {
 
                 },
                 onNavigateToQUIZ_start = {
-                    navController.navigate(AppRouts.START_QUIZ)
+                    navController.navigate(AppRouts.STARTQUIZ)
                 }
 
             )
 
         }
 
-
-        composable(AppRouts.navigation_history_screen) {
-            navigation_history_screen(
+        composable(AppRouts.navigationHistoryScreen) {
+            navigationHistoryScreen(
                 navController = navController,
                 onNavigateBack = {
                     navController.popBackStack()
 
                 },
                 navigation_history_Quiz = {
-                    navController.navigate(AppRouts.HISTORY_QUIZ)
+                    navController.navigate(AppRouts.HISTORYQUIZ)
                 },
                 navigation_history_Quiz_result = {
-                    navController.navigate(AppRouts.History_result)
+                    navController.navigate(AppRouts.HistoryResult)
                 },
             )
-
-
         }
-
-
     }
-
 }
 

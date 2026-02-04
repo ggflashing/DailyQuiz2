@@ -1,32 +1,26 @@
 package com.example.dailyquiz2.presentation.History_Quiz
 
-import android.util.Log
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.copy
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
-import com.example.dailyquiz2.presentation.Start_Quiz.QuizScreenState
-import com.example.dailyquiz2.presentation.Start_Quiz.QuizUiState_QuizProgress
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-sealed class Quiz_history_navigation_screen{
+sealed class QuizHistoryNavigationScreen{
 
-   object history : Quiz_history_navigation_screen()
+   object history : QuizHistoryNavigationScreen()
 
 
-    object history_result : Quiz_history_navigation_screen()
+    object history_result : QuizHistoryNavigationScreen()
 
 
 }
@@ -40,14 +34,14 @@ class HistoryViewModel @Inject constructor (
 
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(navigate_history_screen())
+    private val _uiState = MutableStateFlow(navigateHistoryScreen())
 
     val uiState = _uiState.asStateFlow()
 
-    private val _screen = MutableStateFlow<Quiz_history_navigation_screen>(
-        Quiz_history_navigation_screen.history)
+    private val _screen = MutableStateFlow<QuizHistoryNavigationScreen>(
+        QuizHistoryNavigationScreen.history)
 
-    val screen : StateFlow<Quiz_history_navigation_screen> = _screen
+    val screen : StateFlow<QuizHistoryNavigationScreen> = _screen
 
     private val _selectedHistoryId = MutableStateFlow<String?>(null)
 
@@ -68,25 +62,25 @@ class HistoryViewModel @Inject constructor (
 
     fun openResult(historyId: String) {
         _selectedHistoryId.value = historyId
-        _screen.value = Quiz_history_navigation_screen.history_result
+        _screen.value = QuizHistoryNavigationScreen.history_result
     }
 
     fun back() {
 
-        _screen.value = Quiz_history_navigation_screen.history
+        _screen.value = QuizHistoryNavigationScreen.history
         _selectedHistoryId.value = null
     }
 
-    fun deleteHistory(item: history_models) {
+    fun deleteHistory(item: historyModels) {
         viewModelScope.launch {
             repository.deleteHistory(item)
         }
     }
 
-    fun navigation_result_history() {
+    fun navigationResultHistory() {
         _uiState.update { state ->
             state.copy(
-                screenState_history_models_result = Quiz_history_navigation_screen.history
+                screenState_history_models_result = QuizHistoryNavigationScreen.history
 
             )
 

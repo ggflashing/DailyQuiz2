@@ -1,7 +1,6 @@
 package com.example.dailyquiz2.domain.repository
 
 import com.example.dailyquiz2.domain.models_domain.Quiz
-import com.example.dailyquiz2.presentation.History_Quiz.history_models
 import kotlinx.coroutines.flow.Flow
 
 interface QuizRepository_Domain {

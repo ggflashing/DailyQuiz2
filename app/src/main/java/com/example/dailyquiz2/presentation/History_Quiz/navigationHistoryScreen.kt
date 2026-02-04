@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 
 
 @Composable
-fun navigation_history_screen(
+fun navigationHistoryScreen(
 
     navController: NavHostController,
 
@@ -31,8 +31,8 @@ fun navigation_history_screen(
 
     when (screen) {
 
-        Quiz_history_navigation_screen.history -> {
-            history_Quiz(
+        QuizHistoryNavigationScreen.history -> {
+            historyQuiz(
                 navController = navController,
                 historyModels = history,
                 onOpenResult = { id ->
@@ -46,8 +46,8 @@ fun navigation_history_screen(
             )
         }
 
-        Quiz_history_navigation_screen.history_result -> {
-            result_history(
+        QuizHistoryNavigationScreen.history_result -> {
+            resultHistory(
                 navController = navController,
                 results = results,
                 onNavigateBack = {viewModel.back()}

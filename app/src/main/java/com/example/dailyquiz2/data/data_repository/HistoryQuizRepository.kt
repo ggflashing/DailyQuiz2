@@ -4,8 +4,8 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.example.dailyquiz2.presentation.History_Quiz.history_models
-import com.example.dailyquiz2.presentation.History_Quiz.result_history_models
+import com.example.dailyquiz2.presentation.History_Quiz.historyModels
+import com.example.dailyquiz2.presentation.History_Quiz.resultHistoryModels
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
@@ -24,7 +24,7 @@ class HistoryQuizRepository @Inject constructor(
     private val resultKey = stringPreferencesKey("history_result_key")
 
 
-    override fun getHistory(): Flow<List<history_models>> =
+    override fun getHistory(): Flow<List<historyModels>> =
         dataStore.data.map { prefs ->
 
             prefs[historyKey]?.let {
@@ -34,7 +34,7 @@ class HistoryQuizRepository @Inject constructor(
             } ?: emptyList()
         }
 
-    override fun getResults(): Flow<List<result_history_models>> =
+    override fun getResults(): Flow<List<resultHistoryModels>> =
 
         dataStore.data.map { prefs ->
 
@@ -44,13 +44,13 @@ class HistoryQuizRepository @Inject constructor(
             } ?: emptyList()
         }
 
-    override suspend fun saveHistory(item: history_models) {
+    override suspend fun saveHistory(item: historyModels) {
 
         dataStore.edit { prefs ->
 
             val list = prefs[historyKey]?.let {
 
-                Json.decodeFromString<List<history_models>>(it)
+                Json.decodeFromString<List<historyModels>>(it)
 
             } ?: emptyList()
 
@@ -58,26 +58,26 @@ class HistoryQuizRepository @Inject constructor(
         }
     }
 
-    override suspend fun save_result_history(item: result_history_models) {
+    override suspend fun save_result_history(item: resultHistoryModels) {
 
         dataStore.edit { prefs ->
             val list = prefs[resultKey]?.let {
 
-                Json.decodeFromString<List<result_history_models>>(it)
+                Json.decodeFromString<List<resultHistoryModels>>(it)
             } ?: emptyList()
 
             prefs[resultKey] = Json.encodeToString(list + item)
         }
     }
 
-    override suspend fun deleteHistory(item: history_models) {
+    override suspend fun deleteHistory(item: historyModels) {
         dataStore.edit { prefs ->
 
-            val history = Json.decodeFromString<List<history_models>>(prefs[historyKey] ?: "[]")
+            val history = Json.decodeFromString<List<historyModels>>(prefs[historyKey] ?: "[]")
 
                 .filterNot { it.id_history_model == item.id_history_model }
 
-            val results = Json.decodeFromString<List<result_history_models>>(prefs[resultKey] ?: "[]")
+            val results = Json.decodeFromString<List<resultHistoryModels>>(prefs[resultKey] ?: "[]")
 
                 .filterNot { it.historyId == item.id_history_model }
 

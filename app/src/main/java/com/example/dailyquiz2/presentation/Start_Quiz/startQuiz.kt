@@ -12,7 +12,7 @@ import androidx.navigation.NavHostController
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun start_quiz(
+fun startQuiz(
 
 
     viewModel: Start_quiz_ViewModel = hiltViewModel(),
@@ -33,7 +33,7 @@ fun start_quiz(
     when (val screenState = state.screenState) {
 
         QuizScreenState.Start -> {
-            Start_screen(
+            StartScreen(
                 navController = { onNavigateToHistory() },
                 StartedClick = { viewModel.onStartClicked() }
 
@@ -41,7 +41,7 @@ fun start_quiz(
         }
 
         QuizScreenState.Loading -> {
-            Progress_screen()
+            ProgressScreen()
         }
 
         is QuizScreenState.Progress -> {
@@ -58,7 +58,7 @@ fun start_quiz(
         }
 
         is QuizScreenState.Result -> {
-            Quiz_result_end_Screen(
+            QuizResultEndScreen(
                 correctAnswers = state.quiz.indices.count { i ->
                     state.answersHistory.getOrNull(i) == state.quiz[i].correctAnswerIndex
                 },

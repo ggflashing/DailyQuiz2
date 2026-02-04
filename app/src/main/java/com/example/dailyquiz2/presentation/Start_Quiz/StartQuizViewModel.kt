@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
 import com.example.dailyquiz2.domain.use_case.Logics_use
-import com.example.dailyquiz2.presentation.History_Quiz.history_models
-import com.example.dailyquiz2.presentation.History_Quiz.result_history_models
+import com.example.dailyquiz2.presentation.History_Quiz.historyModels
+import com.example.dailyquiz2.presentation.History_Quiz.resultHistoryModels
 import com.example.dailyquiz2.presentation.QuizResultRepository
 import com.example.dailyquiz2.presentation.Quiz_analysis_screen.QuestionResult
 
@@ -48,7 +48,7 @@ class Start_quiz_ViewModel @Inject constructor(
 
 
 ): ViewModel() {
-    private val _uiState = MutableStateFlow(QuizUiState_QuizProgress())
+    private val _uiState = MutableStateFlow(QuizUiStateQuizProgress())
     val uiState = _uiState.asStateFlow()
     val historyID = UUID.randomUUID().toString()
   //  val uiState: StateFlow<QuizUiState_QuizProgress> = _uiState
@@ -62,7 +62,7 @@ class Start_quiz_ViewModel @Inject constructor(
 
 
 
-        val history = history_models(
+        val history = historyModels(
             stars = correct,
             total = total,
             month = month,
@@ -170,7 +170,7 @@ class Start_quiz_ViewModel @Inject constructor(
                 Log.d("QuizDebug", "Generated historyId for all results: $historyID")
 
                 state.quiz.indices.forEach { idx ->
-                    val model = result_history_models(
+                    val model = resultHistoryModels(
                         questionIndex = idx,
                         totalQuestions = state.quiz.size,
                         questionText = state.quiz[idx].question,

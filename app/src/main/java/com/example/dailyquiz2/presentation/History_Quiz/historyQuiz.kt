@@ -1,12 +1,10 @@
 package com.example.dailyquiz2.presentation.History_Quiz
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,27 +31,25 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.dailyquiz2.R
 
 
 @Composable
-fun history_Quiz(
+fun historyQuiz(
 
     navController: NavController,
 
-    historyModels: List<history_models>,
+    historyModels: List<historyModels>,
 
     onOpenResult: (String) -> Unit,
 
     onNavigateBack: () -> Unit,
 
-    onDelete: (history_models) -> Unit,
+    onDelete: (historyModels) -> Unit,
 
     navigate_result_histroy: () -> Unit
 ) {
@@ -130,7 +126,7 @@ fun history_Quiz(
                         key = { _, item -> item.id_history_model }
                     ) { index, item ->
 
-                        Card_history(
+                        CardHistory(
                             historyModels = item,
                             quizIndex = index + 1,
                             onSelect = {
