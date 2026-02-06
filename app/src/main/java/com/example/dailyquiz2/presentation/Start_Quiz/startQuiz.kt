@@ -73,8 +73,6 @@ fun startQuiz(
 
     }
 
-
-
 }
 
 

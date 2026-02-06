@@ -79,7 +79,6 @@ fun historyQuiz(
 
     var selectedShadow by remember {mutableStateOf(false)}
 
-
     val selectedIndex = remember { mutableStateOf<Int?>(null) }
 
     var showDialog by remember { mutableStateOf(false) }
@@ -91,15 +90,15 @@ fun historyQuiz(
         selectedIndex.value = null
     }
 
-    LaunchedEffect(dim,showDialog) {
-        if (dim || showDialog) {
-            systemUi.setStatusBarColor(Color.Black.copy(alpha = 0.0f), )
-            systemUi.setNavigationBarColor(Color.Black.copy(alpha = 0.0f))
-        } else {
-            systemUi.setStatusBarColor(Color(0xFF7067FF), )
-            systemUi.setNavigationBarColor(Color(0xFF7067FF))
-        }
-    }
+//    LaunchedEffect(dim,showDialog) {
+//        if (dim || showDialog) {
+//            systemUi.setStatusBarColor(Color.Black.copy(alpha = 0.0f), )
+//            systemUi.setNavigationBarColor(Color.Black.copy(alpha = 0.0f))
+//        } else {
+//            systemUi.setStatusBarColor(Color(0xFF7067FF), )
+//            systemUi.setNavigationBarColor(Color(0xFF7067FF))
+//        }
+//    }
 
     LaunchedEffect(showDialog) {
         if (showDialog) {
@@ -110,15 +109,7 @@ fun historyQuiz(
             systemUi.setNavigationBarColor(Color(0xFF7067FF))
         }
     }
-
-
-
-
-
-
     Box(modifier = Modifier.fillMaxSize()) {
-
-
         Scaffold(containerColor = Color.White) { paddingValues ->
             Column(
                 modifier = Modifier
@@ -159,9 +150,7 @@ fun historyQuiz(
                         )
                     }
 
-
                 }
-
                 if (historyModels.isEmpty()) {
 
                     Spacer(modifier = Modifier.height(30.dp))
@@ -172,8 +161,6 @@ fun historyQuiz(
                             .padding(18.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
-
-
 
                     ) {
 
@@ -207,11 +194,7 @@ fun historyQuiz(
 
                     }
 
-
-
-
                 } else {
-
 
                     Box(
                         modifier = Modifier
@@ -237,7 +220,6 @@ fun historyQuiz(
                                 Box(modifier = Modifier.background(Color(0xFF7067FF))) {
                                     CardHistory(
                                         historyModels = item,
-
                                         quizIndex = index + 1,
                                         isSelected = selectedIndex.value == index,
                                         onSelect = { onOpenResult(item.id_history_model) },
@@ -246,9 +228,11 @@ fun historyQuiz(
                                             MenuId = item.id_history_model
                                             dim = true
                                             selectedShadow = true
+
                                         },
 
-                                        )
+
+                                    )
 
                                     DropdownMenu(
 
@@ -307,7 +291,6 @@ fun historyQuiz(
                 )
             }
 
-
         }
 
         if (showDialog) {
@@ -363,20 +346,20 @@ fun historyQuiz(
             }
         }
 
-        if (dim) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.45f))
-                    .clickable(
-                        indication = null,
-                        interactionSource = remember { MutableInteractionSource() }
-                    ) {
-                        dim = false
-                        MenuId = null
-                    }
-            )
-        }
+//        if (dim) {
+//            Box(
+//                modifier = Modifier
+//                    .fillMaxSize()
+//                    .background(Color.Black.copy(alpha = 0.45f))
+//                    .clickable(
+//                        indication = null,
+//                        interactionSource = remember { MutableInteractionSource() }
+//                    ) {
+//                        dim = false
+//                        MenuId = null
+//                    }
+//            )
+//        }
     }
 
 }
