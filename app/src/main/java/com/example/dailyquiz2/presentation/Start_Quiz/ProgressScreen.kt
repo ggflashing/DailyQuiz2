@@ -37,7 +37,6 @@ fun ProgressScreen (
 
 
 ){
-
     Scaffold (containerColor = Color.White) {paddingValues ->
 
         Column (

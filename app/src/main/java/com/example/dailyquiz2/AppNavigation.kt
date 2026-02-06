@@ -12,7 +12,6 @@ import com.example.dailyquiz2.presentation.Start_Quiz.ProgressScreen
 import com.example.dailyquiz2.presentation.Start_Quiz.startQuiz
 
 object AppRouts {
-
     const val STARTQUIZ = "startQuiz"
 
     const val QuizInProgress = "QuizInProgressScreen"
@@ -27,7 +26,6 @@ object AppRouts {
     const val HistoryResult = "HistoryResult"
 
     const val navigationHistoryScreen = "navigationHistoryScreen"
-
 
 }
 

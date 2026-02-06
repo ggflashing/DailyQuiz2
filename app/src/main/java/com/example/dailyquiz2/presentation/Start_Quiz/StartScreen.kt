@@ -48,11 +48,8 @@ fun StartScreen (
 
     navController: () -> Unit,
     StartedClick : () -> Unit,
-
     failed: QuizUiStateQuizProgress
-
 ){
-
     var showError by remember { mutableStateOf(false) }
 
     LaunchedEffect(failed.failedCodeUi) {

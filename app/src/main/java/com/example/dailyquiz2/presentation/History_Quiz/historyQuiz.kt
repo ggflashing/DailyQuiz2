@@ -110,15 +110,7 @@ fun historyQuiz(
             systemUi.setNavigationBarColor(Color(0xFF7067FF))
         }
     }
-
-
-
-
-
-
     Box(modifier = Modifier.fillMaxSize()) {
-
-
         Scaffold(containerColor = Color.White) { paddingValues ->
             Column(
                 modifier = Modifier
@@ -159,9 +151,7 @@ fun historyQuiz(
                         )
                     }
 
-
                 }
-
                 if (historyModels.isEmpty()) {
 
                     Spacer(modifier = Modifier.height(30.dp))
@@ -172,8 +162,6 @@ fun historyQuiz(
                             .padding(18.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
-
-
 
                     ) {
 
@@ -207,11 +195,7 @@ fun historyQuiz(
 
                     }
 
-
-
-
                 } else {
-
 
                     Box(
                         modifier = Modifier
@@ -306,7 +290,6 @@ fun historyQuiz(
                         .sizeIn(180.dp, 40.dp)
                 )
             }
-
 
         }
 
