@@ -47,7 +47,6 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-
             DailyQuiz2Theme {
                 Surface (
 

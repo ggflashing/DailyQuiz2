@@ -4,7 +4,7 @@ import com.example.dailyquiz2.presentation.History_Quiz.historyModels
 import com.example.dailyquiz2.presentation.History_Quiz.resultHistoryModels
 import kotlinx.coroutines.flow.Flow
 
-interface History_repositore  {
+interface HistoryRepositore  {
 
 
     fun getHistory(): Flow<List<historyModels>>

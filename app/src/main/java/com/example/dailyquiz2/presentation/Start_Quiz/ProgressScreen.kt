@@ -44,21 +44,18 @@ fun ProgressScreen (
             modifier = Modifier.fillMaxSize()
                 .padding(paddingValues = paddingValues)
                 .background(Color(0xFF7067FF), shape = RoundedCornerShape(1.dp))
-                .padding(30.dp)
-            ,
-verticalArrangement = Arrangement.Center,
+                .padding(30.dp),
+
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
 
-
         ) {
-
                 Image(
                     painter = painterResource(id = R.drawable.logo_start_screen),
                     modifier = Modifier
                         .sizeIn(280.dp,63.dp),
                     contentScale = ContentScale.Crop,
                     contentDescription = null,
-
 
                 )
 
@@ -67,9 +64,7 @@ verticalArrangement = Arrangement.Center,
                 CircularProgressIndicator()
             }
 
-
         }
-
 
     }
 

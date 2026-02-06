@@ -17,7 +17,7 @@ class HistoryQuizRepository @Inject constructor(
 
     private val dataStore: DataStore<Preferences>
 
-): History_repositore {
+): HistoryRepositore {
 
 
     private val historyKey = stringPreferencesKey("history_key")

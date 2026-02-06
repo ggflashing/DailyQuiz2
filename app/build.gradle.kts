@@ -66,6 +66,9 @@ dependencies {
     implementation(libs.androidx.datastore.core)
     implementation(libs.androidx.datastore.preferences.core)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.foundation.layout)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -90,13 +93,10 @@ dependencies {
 
     implementation(libs.androidx.hilt.navigation.compose)
 
-    // ML Kit
-    implementation(libs.mlkit.translate)
+
 
 // Gson for converting your data class to a savable string
     implementation("com.google.code.gson:gson:2.10.1")
-
-
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
     implementation("org.jetbrains.kotlin:kotlin-serialization:1.5.0")
@@ -104,7 +104,7 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.5-beta")
 
     implementation("androidx.datastore:datastore-preferences:1.1.7")
-
+    implementation("androidx.compose.material:material-icons-extended")
 
 
 }

@@ -3,7 +3,7 @@ package com.example.dailyquiz2.domain.repository
 import com.example.dailyquiz2.domain.models_domain.Quiz
 import kotlinx.coroutines.flow.Flow
 
-interface QuizRepository_Domain {
+interface QuizRepositoryDomain {
 
     fun get_quistion_domain(): Flow<List<Quiz>>
 

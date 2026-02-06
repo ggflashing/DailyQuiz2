@@ -6,18 +6,10 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
-
-
 import com.example.dailyquiz2.presentation.History_Quiz.navigationHistoryScreen
 
-
-import com.example.dailyquiz2.presentation.Quiz_analysis_screen.Quiz_analysis_screen
 import com.example.dailyquiz2.presentation.Start_Quiz.ProgressScreen
-
 import com.example.dailyquiz2.presentation.Start_Quiz.startQuiz
-
-
 
 object AppRouts {
 
@@ -29,7 +21,6 @@ object AppRouts {
 
     const val QuizResuiltEndScreen = "QuizResuiltEndScreen"
 
-    const val QUIZANALYSIS = "quizAnalysis"
 
     const val HISTORYQUIZ = "historyQuiz"
 
@@ -78,29 +69,16 @@ fun AppNavigation() {
                     navController.popBackStack()
 
                 },
-                onNavigateToQUIZ_ANALYSIS = {
-                    navController.navigate(AppRouts.QUIZANALYSIS)
-                },
 
-                onNavigateToHistory = {
-                    navController.navigate(AppRouts.navigationHistoryScreen)
-                }
-            )
-        }
-
-        composable(AppRouts.QUIZANALYSIS) {
-            Quiz_analysis_screen(
-                navController = navController,
-                onNavigateBack = {
-                    navController.popBackStack()
-
-                },
-                onNavigateToQUIZ_start = {
+                onNavigateToQUIZStart = {
                     navController.navigate(AppRouts.STARTQUIZ)
-                }
+                },
 
+
+                        onNavigateToHistory = {
+                    navController.navigate(AppRouts.navigationHistoryScreen)
+                },
             )
-
         }
 
         composable(AppRouts.navigationHistoryScreen) {
@@ -110,12 +88,16 @@ fun AppNavigation() {
                     navController.popBackStack()
 
                 },
-                navigation_history_Quiz = {
+                navigationHistoryQuiz = {
                     navController.navigate(AppRouts.HISTORYQUIZ)
                 },
-                navigation_history_Quiz_result = {
+                navigationHistoryQuizResult = {
                     navController.navigate(AppRouts.HistoryResult)
                 },
+
+                onNavigateToQUIZStart = {
+                    navController.navigate(AppRouts.STARTQUIZ)
+                }
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.example.dailyquiz2.presentation.History_Quiz
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.navigation.NavController
 import com.example.dailyquiz2.R
 
 
+
 @Composable
 fun resultHistory (
     navController: NavController,
@@ -42,15 +44,9 @@ fun resultHistory (
 
     onNavigateBack: () -> Unit,
 
-
+    onNavigationHome: () -> Unit
 
     ) {
-
-
-
-
-
-
 
     val correctAnswers = results.count { it.selectedIndex == it.correctIndex }
 
@@ -134,8 +130,6 @@ fun resultHistory (
                         }
                     }
 
-
-
                     Spacer(modifier = Modifier.height(22.dp))
 
                     Text(
@@ -153,7 +147,6 @@ fun resultHistory (
                             id = when (stars) {
                                 5 -> R.string.Heading_5
                                 4 -> R.string.Heading_4
-
 
                                 3 -> R.string.Heading_3
 
@@ -193,10 +186,7 @@ fun resultHistory (
                         textAlign = TextAlign.Center
 
                     )
-
                     Spacer(modifier = Modifier.height(20.dp))
-
-
 
                 }
             }
@@ -209,6 +199,28 @@ fun resultHistory (
             item {
 
                 Spacer(modifier = Modifier.height(40.dp))
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                        .clickable {
+                            onNavigationHome()
+                        },
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "НАЧАТЬ ЗАНОВО",
+                        color = Color(0xFF2B0063),
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
             }
         }
     }

@@ -16,9 +16,11 @@ fun navigationHistoryScreen(
 
     viewModel: HistoryViewModel = hiltViewModel(),
 
-    navigation_history_Quiz: () -> Unit,
+    navigationHistoryQuiz: () -> Unit,
 
-    navigation_history_Quiz_result: () -> Unit
+    navigationHistoryQuizResult: () -> Unit,
+
+    onNavigateToQUIZStart: () -> Unit
 
 ) {
     val screen by viewModel.screen.collectAsState()
@@ -26,8 +28,6 @@ fun navigationHistoryScreen(
     val history by viewModel.history.collectAsState()
 
     val results by viewModel.selectedResults.collectAsState()
-
-
 
     when (screen) {
 
@@ -41,8 +41,9 @@ fun navigationHistoryScreen(
                 onDelete = { item ->
                     viewModel.deleteHistory(item)
                 },
-                navigate_result_histroy = {},
-                onNavigateBack = onNavigateBack
+                navigateResultHistroy = {},
+                onNavigateBack = onNavigateBack,
+
             )
         }
 
@@ -50,7 +51,8 @@ fun navigationHistoryScreen(
             resultHistory(
                 navController = navController,
                 results = results,
-                onNavigateBack = {viewModel.back()}
+                onNavigateBack = { viewModel.back() },
+                onNavigationHome = onNavigateBack
             )
         }
     }

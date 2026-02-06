@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 
 import androidx.datastore.preferences.core.Preferences
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
-import com.example.dailyquiz2.data.data_repository.History_repositore
+import com.example.dailyquiz2.data.data_repository.HistoryRepositore
 import com.example.dailyquiz2.data.datasource.dataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
@@ -30,6 +30,6 @@ object DataStoreModule {
     @Singleton
     fun provideHistoryRepository(
         dataStore: DataStore<Preferences>
-    ): History_repositore =
+    ): HistoryRepositore =
         HistoryQuizRepository(dataStore)
 }

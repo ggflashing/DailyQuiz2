@@ -2,7 +2,7 @@ package com.example.dailyquiz2.data.data_repository
 
 import com.example.dailyquiz2.data.datasource.QuizRetrofit
 import com.example.dailyquiz2.domain.models_domain.Quiz
-import com.example.dailyquiz2.domain.repository.QuizRepository_Domain
+import com.example.dailyquiz2.domain.repository.QuizRepositoryDomain
 import com.example.dailyquiz2.mapper_data.toDomain
 
 import kotlinx.coroutines.flow.Flow
@@ -16,7 +16,7 @@ class QuizRepository @Inject constructor(
 
    // private val dataStore: DataStore<history_models>
 
-): QuizRepository_Domain {
+): QuizRepositoryDomain {
 
 
 
@@ -31,7 +31,7 @@ class QuizRepository @Inject constructor(
         emit(emptyList())
     }
 
-   // override suspend fun saveHistory(item: history_models) {
+    // override suspend fun saveHistory(item: history_models) {
    //     dataStore.updateData { current ->
    //         current.toBuilder()
    //             .addItems(item.toProto())

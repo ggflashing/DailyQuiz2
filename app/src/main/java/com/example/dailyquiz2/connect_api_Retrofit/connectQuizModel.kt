@@ -1,13 +1,10 @@
 package com.example.dailyquiz2.connect_api_Retrofit
 
-import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
 
-
-data class connect_quiz_model(
+data class connectQuizModel(
     @SerializedName("category")
     @Expose
     val category: String,
@@ -30,7 +27,10 @@ data class connect_quiz_model(
 
     @SerializedName("incorrect_answers")
     @Expose
-    val incorrectAnswers: List<String>
+    val incorrectAnswers: List<String>,
 
+    @SerializedName("response_code")
+    @Expose
+    val responseCode: Int
 
 )
