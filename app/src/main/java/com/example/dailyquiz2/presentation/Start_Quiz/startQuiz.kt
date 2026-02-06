@@ -20,23 +20,21 @@ fun startQuiz(
 
     onNavigateBack: () -> Unit,
 
-    onNavigateToQUIZ_ANALYSIS: () -> Unit,
+    onNavigateToQUIZStart: () -> Unit,
 
     onNavigateToHistory: () -> Unit
 
 ){
-
-
     val state by viewModel.uiState.collectAsState()
     val screenState = viewModel.uiState.collectAsState().value.screenState
 
-    when (val screenState = state.screenState) {
+    when (screenState) {
 
         QuizScreenState.Start -> {
             StartScreen(
                 navController = { onNavigateToHistory() },
-                StartedClick = { viewModel.onStartClicked() }
-
+                StartedClick = { viewModel.onStartClicked() },
+                failed = state,
             )
         }
 
@@ -64,8 +62,8 @@ fun startQuiz(
                 },
                 totalAnswers = state.quiz.size,
                 onRestart = {
-                    viewModel.navigation_Quiz_analysis_screen()
-                    onNavigateToQUIZ_ANALYSIS()
+                    viewModel.navigationQuizStart()
+                    onNavigateToQUIZStart()
 
                 },
                 onNavigateBack = onNavigateBack,

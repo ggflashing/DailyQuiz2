@@ -28,12 +28,9 @@ import com.example.dailyquiz2.R
 
 @Composable
 fun CardHistoryResult(
-
     resultHistoryModels: resultHistoryModels,
 
-
     ) {
-
 
     val isCorrect = resultHistoryModels.selectedIndex == resultHistoryModels.correctIndex
 
@@ -49,7 +46,6 @@ fun CardHistoryResult(
 
 
             Row(
-
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -73,9 +69,6 @@ fun CardHistoryResult(
                     modifier = Modifier.size(24.dp),
                     tint = Color.Unspecified
                 )
-
-
-
             }
 
             Spacer(modifier = Modifier.height(12.dp))

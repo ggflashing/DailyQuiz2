@@ -1,6 +1,7 @@
 package com.example.dailyquiz2.presentation.Start_Quiz
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +24,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,7 +39,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dailyquiz2.R
-
+import kotlinx.coroutines.delay
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -43,7 +49,22 @@ fun StartScreen (
     navController: () -> Unit,
     StartedClick : () -> Unit,
 
+    failed: QuizUiStateQuizProgress
+
 ){
+
+    var showError by remember { mutableStateOf(false) }
+
+    LaunchedEffect(failed.failedCodeUi) {
+
+        Log.d("Qui", "failedCodeUi = ${failed.failedCodeUi}")
+
+        if (failed.failedCodeUi != 0) {
+            showError = true
+            delay(3000L)
+            showError = false
+        }
+    }
 
     Scaffold(containerColor = Color.White) { paddingValues ->
 
@@ -56,9 +77,6 @@ fun StartScreen (
                 .padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
-
-
-
 
             Button(
                 onClick = navController,
@@ -150,11 +168,28 @@ fun StartScreen (
                 }
             }
 
+            Spacer(modifier = Modifier.height(100.dp))
 
+            if (showError){
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(color = Color(0xFF888888), shape = RoundedCornerShape(30.dp)),
+                    horizontalArrangement = Arrangement.Center
 
+                ) {
+
+                    Text("Ошибка! Попробуйте ещё раз",
+                        color = Color.White,
+                        fontSize = 16.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+
+            }
 
         }
-
 
     }
 

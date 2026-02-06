@@ -16,18 +16,13 @@ import javax.inject.Inject
 
 
 sealed class QuizHistoryNavigationScreen{
-
    object history : QuizHistoryNavigationScreen()
-
-
     object history_result : QuizHistoryNavigationScreen()
-
 
 }
 
 @HiltViewModel
 class HistoryViewModel @Inject constructor (
-
 
     private val repository: HistoryQuizRepository
 
@@ -38,15 +33,19 @@ class HistoryViewModel @Inject constructor (
 
     val uiState = _uiState.asStateFlow()
 
+
     private val _screen = MutableStateFlow<QuizHistoryNavigationScreen>(
         QuizHistoryNavigationScreen.history)
+
 
     val screen : StateFlow<QuizHistoryNavigationScreen> = _screen
 
     private val _selectedHistoryId = MutableStateFlow<String?>(null)
 
+
     val history = repository.getHistory()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
+
 
     private val allResults = repository.getResults()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())

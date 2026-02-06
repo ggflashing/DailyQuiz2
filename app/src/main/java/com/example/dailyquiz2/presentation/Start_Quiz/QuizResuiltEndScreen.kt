@@ -39,10 +39,7 @@ fun QuizResultEndScreen(
     onRestart: () -> Unit,
     onNavigateBack: () -> Unit,
 
-
     ) {
-
-
 
     val stars = correctAnswers.coerceIn(0,totalAnswers)
 
@@ -199,14 +196,8 @@ fun QuizResultEndScreen(
                     )
                 }
 
-
             }
-
-
         }
 
-
     }
-
-
 }

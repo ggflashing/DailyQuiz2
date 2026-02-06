@@ -46,19 +46,12 @@ fun QuizInProgressScreen(
     onNavigateBack: () -> Unit
 
 ) {
-
-
     val quizList = state.quiz
 
     val currentQuiz = quizList.getOrNull(state.currentIndex)
 
     val isLastQuestion = state.currentIndex == quizList.lastIndex
-
-
-
     Scaffold(topBar = {
-
-
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -66,30 +59,21 @@ fun QuizInProgressScreen(
                 .padding(paddingValues = PaddingValues(top = 30.dp))
                 .background(Color(0xFF6D67FF))
         ) {
-
-
             Spacer(modifier = Modifier.padding(top = 20.dp))
 
             IconButton(
-
-
                 onClick = onNavigateBack,
                 modifier = Modifier.align(Alignment.CenterStart)
-
-
             ) {
-
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     modifier = Modifier.size(48.dp, 28.dp),
                     tint = Color.White
-
                 )
             }
 
             Image(
-
                 painter = painterResource(id = R.drawable.logo_start_screen),
                 contentDescription = null,
                 modifier = Modifier
@@ -98,7 +82,6 @@ fun QuizInProgressScreen(
 
             )
         }
-
 
     }) { paddingValues ->
         if (quizList.isEmpty()) {
@@ -257,18 +240,15 @@ fun QuizInProgressScreen(
                         )
                     }
 
-
-
-
                 }
+
                 Text(
                     text = "Вернуться к предыдущим вопросам нельзя",
-                    color = Color(0xFF00BCD4),
+                    color = Color.White,
                     modifier = Modifier.padding(top = 12.dp),
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold
                 )
-
 
             }
         }

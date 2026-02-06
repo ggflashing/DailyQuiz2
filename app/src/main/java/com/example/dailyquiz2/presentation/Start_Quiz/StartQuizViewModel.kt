@@ -6,12 +6,9 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
-import com.example.dailyquiz2.domain.use_case.Logics_use
+import com.example.dailyquiz2.domain.use_case.LogicsUse
 import com.example.dailyquiz2.presentation.History_Quiz.historyModels
 import com.example.dailyquiz2.presentation.History_Quiz.resultHistoryModels
-import com.example.dailyquiz2.presentation.QuizResultRepository
-import com.example.dailyquiz2.presentation.Quiz_analysis_screen.QuestionResult
-
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -39,11 +36,7 @@ sealed class QuizScreenState {
 @HiltViewModel
 class Start_quiz_ViewModel @Inject constructor(
 
-
-    private val Logics_use: Logics_use,
-
-    private val resultRepository: QuizResultRepository,
-
+    private val Logics_use: LogicsUse,
     private val historyRepository: HistoryQuizRepository
 
 
@@ -58,8 +51,6 @@ class Start_quiz_ViewModel @Inject constructor(
     fun onQuizFinished(correct: Int, total: Int) {
         val now = ZonedDateTime.now(ZoneId.of("Europe/Moscow"))
         val month = now.month.getDisplayName(TextStyle.FULL, Locale("ru", "RU"))
-
-
 
 
         val history = historyModels(
@@ -77,8 +68,7 @@ class Start_quiz_ViewModel @Inject constructor(
         }
 
     }
-
-    fun navigation_Quiz_analysis_screen() {
+    fun navigationQuizStart() {
        _uiState.update { state ->
            state.copy(
               // screenState = QuizScreenState.Start,
@@ -91,7 +81,6 @@ class Start_quiz_ViewModel @Inject constructor(
 
        }
     }
-
     fun navigation_start() {
         _uiState.update { state->
             state.copy(
@@ -103,17 +92,13 @@ class Start_quiz_ViewModel @Inject constructor(
         }
     }
 
-
     fun onAnswerSelected(index: Int) {
         Log.d("QuizDebug", "Answer selected: $index")
 
         _uiState.update { current ->
             current.copy(selectedAnswerIndex = index,)
         }
-
-
     }
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun onNextQuestion() {
         _uiState.update { state ->
@@ -124,8 +109,6 @@ class Start_quiz_ViewModel @Inject constructor(
                 Log.d("QuizDebug", "No answer selected, cannot proceed")
                 return@update state
             }
-
-
 
             val newHistory = state.answersHistory.toMutableList()
 
@@ -148,24 +131,8 @@ class Start_quiz_ViewModel @Inject constructor(
                 )
             } else {
 
-                val results = state.quiz.indices.map { idx ->
-                    QuestionResult(
-                        questionIndex = idx,
-                        totalQuestions = state.quiz.size,
-                        questionText = state.quiz[idx].question,
-                        options = state.quiz[idx].answers,
-                        selectedIndex = newHistory[idx] ?: -1,
-                        correctIndex = state.quiz[idx].correctAnswerIndex
-                    )
-                }
-
-                resultRepository.setResults(results)
-
-
                     //  fun result_datastore_history(newHistory: List<Int?>) {
                  //   Log.d("QuizDebug", "result_datastore_history called")
-
-
 
                 Log.d("QuizDebug", "Generated historyId for all results: $historyID")
 
@@ -191,9 +158,6 @@ class Start_quiz_ViewModel @Inject constructor(
                     }
                 }
 
-
-
-
                 var correctCount = 0
 
                 state.quiz.indices.forEach { idx ->
@@ -218,8 +182,6 @@ class Start_quiz_ViewModel @Inject constructor(
                         "Quiz finished. Correct answers: $correctCount / ${state.quiz.size}"
                     )
 
-
-
                     state.copy(
                         answersHistory = newHistory,
                         selectedAnswerIndex = null,
@@ -232,7 +194,6 @@ class Start_quiz_ViewModel @Inject constructor(
                 }
             }
         }
-
 
     //init {
   //      loadQuiz()
@@ -250,23 +211,61 @@ class Start_quiz_ViewModel @Inject constructor(
 
 
         viewModelScope.launch {
-            Logics_use().first().let{ quiz ->
-
-                _uiState.update {
-
-                    Log.d("QuizDebug", "Quiz loaded: ${quiz.size} questions")
-
-                    it.copy(
-                        quiz = quiz,
-                        answersHistory = List(quiz.size) { null },
-                        screenState = QuizScreenState.Progress(currentIndex = 0)
+            try {
 
 
-                    )
+                Logics_use().first().let { quiz ->
+
+                    val code = quiz.first().failedCode
+
+                    if (code == 0) {
+
+                        _uiState.update {
+
+                            Log.d("QuizDebug", "Quiz loaded: ${quiz.size} questions")
+
+                            it.copy(
+                                quiz = quiz,
+                                answersHistory = List(quiz.size) { null },
+                                screenState = QuizScreenState.Progress(currentIndex = 0),
+                                failedCodeUi = 0
+
+                                )
+
+
+                        }
+
+
+                    } else {
+                        Log.e("errr", "Ошибка загрузки. Код: $code")
+
+                        if (quiz.isEmpty()) {
+
+
+                            _uiState.update {
+                                it.copy(
+                                    screenState = QuizScreenState.Start,
+                                    failedCodeUi = code
+                                )
+                            }
+                        }
+
+                    }
 
 
                 }
+            }catch (e: Exception){
 
+                Log.e("error", "Ошибка при загрузке: ${e.message}", e)
+
+                _uiState.update {
+                    it.copy(
+                        screenState = QuizScreenState.Start,
+                        failedCodeUi = -1
+
+                    )
+
+                }
 
             }
 
@@ -285,7 +284,5 @@ class Start_quiz_ViewModel @Inject constructor(
     //        }
     //    }
   //  }
-
-
 
 }

@@ -22,7 +22,5 @@ data class resultHistoryModels(
 
     val correctIndex: Int,
 
-
-
    // val screenState_history_models_result: Quiz_history_navigation_screen = Quiz_history_navigation_screen.history
 )

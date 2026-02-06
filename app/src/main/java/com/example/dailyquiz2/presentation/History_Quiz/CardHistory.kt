@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.zIndex
 import com.example.dailyquiz2.R
 
 
@@ -37,29 +38,26 @@ fun CardHistory(
 
     historyModels: historyModels,
     quizIndex: Int,
-  //  isSelected: Boolean,
+    isSelected: Boolean,
     onSelect: () -> Unit,
-    onLongClick: () -> Unit
+    onLongClick: () -> Unit,
+
 ) {
 
-
-    var isSelected by remember { mutableStateOf(false) }
     var showDialog by remember { mutableStateOf(false) }
-
-
-    val backgroundColor = if (isSelected) Color(0xFF7067FF).copy(alpha = 0.8f) else Color.White
-
 
         Card(
             modifier = Modifier
                 .combinedClickable(
                     onClick =  { onSelect() },
-                    onLongClick = {onLongClick()}
+                    onLongClick = { onLongClick(); },
+
                 )
                 .fillMaxWidth()
                 .padding(5.dp),
             shape = RoundedCornerShape(38.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White)
+            colors = CardDefaults.cardColors(containerColor = Color.White),
+            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
         ) {
 
 
@@ -68,8 +66,6 @@ fun CardHistory(
                     .background(Color.White, shape = RoundedCornerShape(26.dp))
                     .padding(10.dp)
                     .height(100.dp)
-
-
             ) {
 
                 Row(
@@ -91,11 +87,7 @@ fun CardHistory(
                         fontWeight = FontWeight.Bold
 
                         )
-
-
                 }
-
-
                 Row(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -125,7 +117,7 @@ fun CardHistory(
                     modifier = Modifier
                         .align(Alignment.BottomStart)
                         .padding(16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
@@ -138,10 +130,7 @@ fun CardHistory(
 
                     Text(
                         text = historyModels.month, fontSize = 15.sp, color = Color(0xFF2B0063),
-
                         )
-
-
                 }
 
                 Text(
