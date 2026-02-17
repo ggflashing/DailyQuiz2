@@ -1,5 +1,6 @@
 package com.example.dailyquiz2.domain.use_case
 
+import com.example.dailyquiz2.data.data_repository.QuizRepository
 import com.example.dailyquiz2.domain.models_domain.Quiz
 import com.example.dailyquiz2.domain.repository.QuizRepositoryDomain
 import kotlinx.coroutines.flow.Flow
@@ -7,7 +8,7 @@ import javax.inject.Inject
 
 class LogicsUse @Inject constructor(
 
-    private val repository_get: QuizRepositoryDomain
+    private val repository_get: QuizRepository
 
 ) {
 
@@ -15,5 +16,6 @@ class LogicsUse @Inject constructor(
         return repository_get.get_quistion_domain()
 
     }
+
 
 }

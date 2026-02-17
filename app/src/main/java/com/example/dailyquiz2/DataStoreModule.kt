@@ -21,15 +21,9 @@ object DataStoreModule {
 
     @Provides
     @Singleton
-    fun provideDataStore(
-        @ApplicationContext context: Context
-    ): DataStore<Preferences> =
-        context.dataStore
+    fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> = context.dataStore
 
     @Provides
     @Singleton
-    fun provideHistoryRepository(
-        dataStore: DataStore<Preferences>
-    ): HistoryRepositore =
-        HistoryQuizRepository(dataStore)
+    fun provideHistoryRepository(dataStore: DataStore<Preferences>): HistoryRepositore = HistoryQuizRepository(dataStore)
 }

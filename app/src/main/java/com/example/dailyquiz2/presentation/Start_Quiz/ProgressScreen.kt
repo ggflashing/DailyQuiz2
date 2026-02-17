@@ -26,7 +26,6 @@ import com.example.dailyquiz2.R
 @Composable
 fun ProgressScreen (
 
-
    // onNavigateBack: () -> Unit,
 
    // navController: NavController,

@@ -5,8 +5,9 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.dailyquiz2.data.data_repository.HistoryQuizRepository
+
 import com.example.dailyquiz2.domain.use_case.LogicsUse
+import com.example.dailyquiz2.domain.use_case.SaveHistoryQuizUseCase
 import com.example.dailyquiz2.presentation.History_Quiz.historyModels
 import com.example.dailyquiz2.presentation.History_Quiz.resultHistoryModels
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -37,10 +38,11 @@ sealed class QuizScreenState {
 class Start_quiz_ViewModel @Inject constructor(
 
     private val Logics_use: LogicsUse,
-    private val historyRepository: HistoryQuizRepository
+    private val historysave: SaveHistoryQuizUseCase
 
 
 ): ViewModel() {
+
     private val _uiState = MutableStateFlow(QuizUiStateQuizProgress())
     val uiState = _uiState.asStateFlow()
     val historyID = UUID.randomUUID().toString()
@@ -63,8 +65,9 @@ class Start_quiz_ViewModel @Inject constructor(
 
         )
 
+
         viewModelScope.launch {
-            historyRepository.saveHistory(history)
+            historysave.invoke(history)
         }
 
     }
@@ -154,7 +157,7 @@ class Start_quiz_ViewModel @Inject constructor(
                     )
 
                     viewModelScope.launch {
-                        historyRepository.save_result_history(model)
+                        historysave.invoke(model)
                     }
                 }
 
@@ -213,7 +216,6 @@ class Start_quiz_ViewModel @Inject constructor(
         viewModelScope.launch {
             try {
 
-
                 Logics_use().first().let { quiz ->
 
                     val code = quiz.first().failedCode
@@ -231,10 +233,7 @@ class Start_quiz_ViewModel @Inject constructor(
                                 failedCodeUi = 0
 
                                 )
-
-
                         }
-
 
                     } else {
                         Log.e("errr", "Ошибка загрузки. Код: $code")
@@ -251,7 +250,6 @@ class Start_quiz_ViewModel @Inject constructor(
                         }
 
                     }
-
 
                 }
             }catch (e: Exception){

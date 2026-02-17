@@ -12,8 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class moduleRepository {
 
     @Binds
-    abstract fun bindQuizRepository(
-        repository_module: QuizRepository
-    ): QuizRepositoryDomain
+    abstract fun bindQuizRepository(repository_module: QuizRepository): QuizRepositoryDomain
 
 }
